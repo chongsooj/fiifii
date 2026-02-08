@@ -1,372 +1,304 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  ChevronRight, 
-  Clock, 
-  CheckCircle2, 
-  Lock, 
-  AlertTriangle, 
-  ArrowRight, 
-  BarChart3, 
-  MessageSquare, 
-  FileText,
-  Smartphone,
-  ShieldCheck,
-  Star,
-  Download,
-  Users,
-  TrendingUp,
-  Search,
-  Award,
-  DollarSign
-} from 'lucide-react';
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState('summary');
-  const [businessInput, setBusinessInput] = useState('');
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIIFII - 이노비즈 인증 지원사업</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;700;900&display=swap');
+        body { font-family: 'Pretendard', sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .progress-ring__circle { transition: stroke-dashoffset 0.8s ease-in-out; transform: rotate(-90deg); transform-origin: 50% 50%; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 pb-32">
 
-  const handleDiagnosis = () => {
-    if (!businessInput) return;
-    setIsAnalyzing(true);
-    setTimeout(() => {
-      setIsAnalyzing(false);
-      setShowResult(true);
-    }, 2000);
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-900 pb-32">
-      {/* 1. 상단 GNB */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-blue-200 shadow-lg">F</div>
-          <span className="text-xl font-bold text-blue-600 tracking-tight">FIIFII</span>
+    <!-- 1. GNB -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-gray-100 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-blue-200">F</div>
+            <span class="text-xl font-bold text-blue-600 tracking-tight">FIIFII</span>
         </div>
-        <div className="hidden md:flex items-center space-x-8 text-sm font-semibold">
-          <a href="#" className="text-gray-600 hover:text-blue-600">지원사업 찾기</a>
-          <a href="#" className="text-gray-600 hover:text-blue-600">AI 매칭</a>
-          <a href="#" className="text-gray-600 hover:text-blue-600 font-bold">인증 컨설팅</a>
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-full font-bold shadow-md hover:bg-blue-700 transition-all">앱 다운로드</button>
+        <div class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+            <a href="#" class="text-gray-600 hover:text-blue-600">지원사업 찾기</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">AI 매칭</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600 font-bold">인증 컨설팅</a>
+            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-bold shadow-md hover:bg-blue-700 transition-all">앱 다운로드</button>
         </div>
-      </nav>
+    </nav>
 
-      {/* 2. Hero Section (이노비즈 공고 반영) */}
-      <header className="bg-white border-b border-gray-50 pt-12 pb-16">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <div className="flex items-center space-x-3 mb-6">
-              <span className="bg-blue-50 text-blue-600 text-xs font-black px-3 py-1.5 rounded-md border border-blue-100 uppercase tracking-wider">Inno-Biz Support</span>
-              <span className="flex items-center text-red-500 text-xs font-bold bg-red-50 py-1.5 px-3 rounded-md">
-                <Clock className="w-3.5 h-3.5 mr-1" /> 선착순 마감 주의
-              </span>
-            </div>
-            <h1 className="text-3xl md:text-5xl font-black mb-6 leading-[1.15] text-gray-900">
-              2025년 <span className="text-blue-600">이노비즈(Inno-Biz)</span> <br/>
-              인증 획득 지원사업 공고
-            </h1>
-            <p className="text-lg text-gray-500 mb-8 leading-relaxed font-medium">
-              기술혁신형 중소기업 인증으로 금융·R&D 혜택을 받으세요. <br/>
-              피피 AI가 우리 기업의 인증 가능 등급을 1분 만에 예측해 드립니다.
-            </p>
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-lg shadow-xl shadow-blue-100 hover:-translate-y-1 transition-all flex items-center group">
-              인증 가능 여부 1초 진단
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="bg-blue-50 p-6 rounded-[2.5rem] border border-blue-100 flex flex-col justify-between aspect-square">
-              <DollarSign className="text-blue-600 w-8 h-8" />
-              <div>
-                <p className="text-sm font-bold text-blue-800/60 mb-1">지원 내용</p>
-                <p className="text-2xl font-black text-blue-900 leading-tight">인증 수수료<br/>+ 컨설팅비</p>
-              </div>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-[2.5rem] border border-gray-100 flex flex-col justify-between aspect-square">
-              <Award className="text-gray-400 w-8 h-8" />
-              <div>
-                <p className="text-sm font-bold text-gray-400 mb-1">대상 기업</p>
-                <p className="text-2xl font-black text-gray-800 leading-tight">업력 3년 이상<br/>중소기업</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* 3. Main Content 영역 */}
-      <main className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        {/* 좌측 정보 영역 */}
-        <div className="lg:col-span-8 space-y-16">
-          
-          {/* 기획 2: AI Match & Insight */}
-          <section className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm overflow-hidden relative group">
-            <div className="flex justify-between items-center mb-8 relative z-10">
-              <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
-                  <BarChart3 className="w-6 h-6" />
+    <!-- 2. Hero Section -->
+    <header class="bg-white border-b border-gray-50 pt-12 pb-16">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-7">
+                <div class="flex items-center space-x-3 mb-6">
+                    <span class="bg-blue-50 text-blue-600 text-xs font-black px-3 py-1.5 rounded-md border border-blue-100 uppercase">Inno-Biz Support</span>
+                    <span class="flex items-center text-red-500 text-xs font-bold bg-red-50 py-1.5 px-3 rounded-md">
+                        <i class="fa-solid fa-clock mr-1"></i> 선착순 마감 주의
+                    </span>
                 </div>
-                <h3 className="text-xl font-black text-gray-900">우리 기업 인증 매칭</h3>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-              <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-3xl border border-gray-100 relative group-hover:bg-white transition-colors">
-                {!isLoggedIn && (
-                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center rounded-3xl">
-                    <Lock className="w-10 h-10 text-blue-600 mb-3" />
-                    <button className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg text-sm">로그인하고 예측 등급 보기</button>
-                  </div>
-                )}
-                <p className="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">예상 인증 등급</p>
-                <div className="relative w-32 h-32 flex items-center justify-center">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-gray-100" />
-                    <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray="364.4" strokeDashoffset="364.4" className="text-blue-600 transition-all duration-1000" />
-                  </svg>
-                  <span className="absolute text-3xl font-black text-gray-300 font-serif">?</span>
-                </div>
-                <p className="mt-4 text-xs font-bold text-gray-400">데이터를 분석 중입니다</p>
-              </div>
-
-              <div className="flex flex-col justify-center space-y-6">
-                <div className="p-5 bg-blue-50 rounded-2xl border border-blue-100">
-                  <div className="flex items-center space-x-2 mb-2 text-blue-700">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm font-black italic">Insight</span>
-                  </div>
-                  <p className="text-sm text-blue-900/80 font-medium leading-relaxed">
-                    로그인하시면 귀사가 보유한 <span className="font-bold underline decoration-blue-300 underline-offset-4">'기업부설연구소'</span> 및 <span className="font-bold underline decoration-blue-300 underline-offset-4">'특허'</span> 현황으로 가산점을 얼마나 확보할 수 있는지 바로 계산해 드립니다.
-                  </p>
-                </div>
-                <a href="#" className="text-sm font-bold text-gray-400 hover:text-blue-600 flex items-center transition-all">
-                  평가 점수가 부족하신가요? 1:1 기술평가 대응 전략 <ArrowRight className="w-4 h-4 ml-1" />
-                </a>
-              </div>
-            </div>
-          </section>
-
-          {/* 기획 3: Structured Info (하단 좌측 탭) */}
-          <section className="space-y-8">
-            <div className="flex space-x-12 border-b border-gray-100 overflow-x-auto pb-1">
-              {['summary', 'qualification', 'documents', 'faq'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`pb-4 text-sm font-black whitespace-nowrap transition-all relative ${
-                    activeTab === tab ? 'text-blue-600' : 'text-gray-400 hover:text-gray-600'
-                  }`}
-                >
-                  {tab === 'summary' ? '사업개요' : tab === 'qualification' ? '지원대상' : tab === 'documents' ? '준비서류' : '자주묻는질문'}
-                  {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />}
-                </button>
-              ))}
-            </div>
-
-            <div className="min-h-[300px] text-gray-700 leading-relaxed font-medium">
-              {activeTab === 'summary' && (
-                <div className="animate-in fade-in duration-300 space-y-6">
-                  <div className="flex items-center space-x-2 text-gray-900 mb-2">
-                    <div className="w-1 h-5 bg-blue-600 rounded-full" />
-                    <h3 className="text-xl font-black">지원 내용 상세</h3>
-                  </div>
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <div className="bg-blue-50 p-2 rounded-lg mr-4 mt-1"><DollarSign className="w-4 h-4 text-blue-600" /></div>
-                      <div>
-                        <p className="font-bold text-gray-900">수수료 지원</p>
-                        <p className="text-sm text-gray-500">이노비즈 신규 인증 획득 시 발생하는 기술평가 수수료 지원</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="bg-blue-50 p-2 rounded-lg mr-4 mt-1"><Users className="w-4 h-4 text-blue-600" /></div>
-                      <div>
-                        <p className="font-bold text-gray-900">전문가 컨설팅</p>
-                        <p className="text-sm text-gray-500">현장 실사 대비 자가진단 및 기술사업계획서 작성 코칭</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              )}
-              {activeTab === 'documents' && (
-                <div className="animate-in fade-in duration-300 space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-gray-900">
-                      <div className="w-1 h-5 bg-blue-600 rounded-full" />
-                      <h3 className="text-xl font-black">필수 제출 서류</h3>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    {[
-                      { name: "사업자등록증 및 공장등록증", essential: true },
-                      { name: "최근 3개년 재무제표 (국세청 접수분)", essential: true },
-                      { name: "기술사업계획서 (이노비즈 표준 양식)", essential: true },
-                      { name: "4대 사회보험 사업장 가입자 명부", essential: true }
-                    ].map((doc) => (
-                      <div key={doc.name} className="flex items-center justify-between p-5 bg-white border border-gray-100 rounded-2xl group">
-                        <div className="flex items-center">
-                          <FileText className="w-5 h-5 text-gray-400 mr-3 group-hover:text-blue-500" />
-                          <span className="font-bold text-gray-800">{doc.name}</span>
-                        </div>
-                        <button className="px-3 py-1.5 bg-blue-50 text-blue-600 text-[11px] font-black rounded-lg hover:bg-blue-600 hover:text-white transition-all">
-                          서류 작성 대행 문의
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* AI 진단 입력 섹션 (이노비즈 최적화) */}
-          <section className="bg-gradient-to-br from-blue-700 via-indigo-700 to-indigo-900 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
-             <div className="relative z-10">
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="p-2 bg-white/20 backdrop-blur-md rounded-lg">
-                    <ShieldCheck className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="font-black uppercase tracking-[0.2em] text-xs text-blue-100">Inno-Biz Pre-Check</span>
-                </div>
-                <h2 className="text-3xl font-black mb-4 leading-tight">기업의 <span className="text-blue-300">핵심 기술력</span>을 요약해 주세요</h2>
-                <p className="text-blue-100/80 mb-8 leading-relaxed font-medium">
-                  보유하신 특허 기술이나 제품의 혁신성을 간단히 입력하시면, <br/>
-                  이노비즈 기술평가 지표에 근거하여 통과 가능 여부를 시뮬레이션합니다.
+                <h1 class="text-3xl md:text-5xl font-black mb-6 leading-[1.15] text-gray-900">
+                    2025년 <span class="text-blue-600">이노비즈(Inno-Biz)</span> <br/>
+                    인증 획득 지원사업 공고
+                </h1>
+                <p class="text-lg text-gray-500 mb-8 leading-relaxed font-medium">
+                    기술혁신형 중소기업 인증으로 금융·R&D 혜택을 받으세요. <br/>
+                    피피 AI가 우리 기업의 인증 가능 등급을 1분 만에 예측해 드립니다.
                 </p>
-
-                <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-inner">
-                  <textarea 
-                    value={businessInput}
-                    onChange={(e) => setBusinessInput(e.target.value)}
-                    placeholder="예: 3D 정밀 가공 부품을 제조하며, 관련 특허 2건을 보유 중입니다. 현재 연구 인력은 3명이며 매출은..."
-                    className="w-full h-36 bg-transparent border-none focus:ring-0 text-white placeholder-blue-200/50 resize-none text-base font-medium"
-                  />
-                  <div className="flex justify-between items-center mt-6 pt-6 border-t border-white/10">
-                    <span className="text-xs text-blue-200 font-bold uppercase">심사 기준: 기술혁신 / 기술사업화 / 기술경영</span>
-                    <button 
-                      onClick={handleDiagnosis}
-                      disabled={isAnalyzing || businessInput.length < 20}
-                      className="bg-white text-indigo-700 px-8 py-3.5 rounded-2xl font-black shadow-lg hover:bg-blue-50 transition-all disabled:opacity-50 flex items-center"
-                    >
-                      {isAnalyzing ? (
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-indigo-600 border-t-transparent mr-2" />
-                      ) : (
-                        <BarChart3 className="w-5 h-5 mr-2" />
-                      )}
-                      인증 등급 진단하기
-                    </button>
-                  </div>
-                </div>
-             </div>
-          </section>
-
-          {/* 기획 5: Success Story */}
-          <section className="pt-8">
-            <h3 className="text-2xl font-black mb-10 text-center">피피와 이노비즈를 획득한 기업들</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { name: "(주)테크이노베이션", text: "기술사업계획서 작성이 막막했는데 피피 AI가 뽑아준 키워드로 현장 평가를 무사히 통과했습니다.", person: "CTO 이정훈" },
-                { name: "대성정밀(주)", text: "매출 요건이 간당간당해서 걱정했지만 피피 컨설턴트의 기술력 강조 전략으로 A등급을 받았습니다.", person: "대표 박대성" }
-              ].map((story, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col justify-between hover:border-blue-200 transition-colors">
-                  <p className="text-gray-600 font-medium leading-relaxed italic mb-6">"{story.text}"</p>
-                  <div className="flex items-center justify-between border-t border-gray-50 pt-4">
-                    <span className="text-sm font-black text-gray-900">{story.name}</span>
-                    <span className="text-xs font-bold text-gray-400">{story.person}</span>
-                  </div>
-                </div>
-              ))}
+                <button onclick="document.getElementById('ai-section').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-lg shadow-xl shadow-blue-100 hover:-translate-y-1 transition-all flex items-center group">
+                    인증 가능 여부 1초 진단
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </button>
             </div>
-          </section>
-
-        </div>
-
-        {/* 기획 4: 하단 우측 Consulting Sticky Card */}
-        <aside className="lg:col-span-4">
-          <div className="sticky top-28 space-y-6">
-            
-            <div className="bg-white border-2 border-blue-600 rounded-[2.5rem] p-8 shadow-2xl shadow-blue-100 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-blue-600 text-white px-5 py-1.5 rounded-bl-2xl text-[10px] font-black uppercase tracking-widest">
-                Recommended
-              </div>
-              <div className="flex items-center space-x-2 text-blue-600 mb-6">
-                <Award className="w-6 h-6" />
-                <span className="text-sm font-black">인증 전문 컨설팅</span>
-              </div>
-              <h3 className="text-2xl font-black mb-8 leading-snug">이노비즈 <br/><span className="text-blue-600">최종 획득</span> 패키지</h3>
-              
-              <div className="space-y-4 mb-10">
-                {[
-                  { pkg: "패키지 A", title: "자가진단 및 서류 첨삭", price: "99만원", icon: <FileText className="w-4 h-4" /> },
-                  { pkg: "패키지 B", title: "현장평가 대응 + 서류 대행", price: "가장 인기", icon: <Star className="w-4 h-4" />, highlight: true },
-                  { pkg: "패키지 C", title: "인증 획득 보장 (불가 시 환불)", price: "상담 후 결정", icon: <Users className="w-4 h-4" /> }
-                ].map((item, idx) => (
-                  <div key={idx} className={`group flex items-center justify-between p-4 rounded-2xl border transition-all cursor-pointer ${item.highlight ? 'bg-blue-600 border-blue-600 text-white shadow-lg' : 'bg-gray-50 border-gray-100 text-gray-800 hover:border-blue-200'}`}>
-                    <div className="flex items-center">
-                      <div className={`p-2 rounded-lg mr-3 ${item.highlight ? 'bg-white/20' : 'bg-white shadow-sm'}`}>
-                        {item.icon}
-                      </div>
-                      <div>
-                        <p className={`text-[10px] font-black ${item.highlight ? 'text-blue-100' : 'text-blue-600'}`}>{item.pkg}</p>
-                        <p className="text-sm font-black">{item.title}</p>
-                      </div>
+            <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-6 rounded-[2.5rem] border border-blue-100 flex flex-col justify-between aspect-square">
+                    <i class="fa-solid fa-dollar-sign text-blue-600 text-2xl"></i>
+                    <div>
+                        <p class="text-sm font-bold text-blue-800/60 mb-1">지원 내용</p>
+                        <p class="text-2xl font-black text-blue-900 leading-tight">인증 수수료<br/>+ 컨설팅비</p>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              <button className="w-full bg-blue-600 text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-blue-200 hover:bg-blue-700 transition-all flex items-center justify-center mb-4 text-center">
-                <MessageSquare className="w-5 h-5 mr-2" />
-                무료 상담 예약하기
-              </button>
-              <p className="text-center text-[11px] text-gray-400 font-bold italic">"이노비즈 인증 기업 평균 혜택액: 연 5천만원 이상"</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-[2.5rem] border border-gray-100 flex flex-col justify-between aspect-square">
+                    <i class="fa-solid fa-award text-gray-400 text-2xl"></i>
+                    <div>
+                        <p class="text-sm font-bold text-gray-400 mb-1">대상 기업</p>
+                        <p class="text-2xl font-black text-gray-800 leading-tight">업력 3년 이상<br/>중소기업</p>
+                    </div>
+                </div>
             </div>
-
-            <div className="bg-indigo-900 rounded-[2rem] p-7 text-white shadow-lg">
-              <h4 className="font-black mb-3 text-lg flex items-center">
-                <Smartphone className="w-5 h-5 mr-2 text-indigo-300" />
-                이노비즈 혜택 리스트
-              </h4>
-              <p className="text-indigo-200 text-xs font-medium leading-relaxed mb-6">
-                법인세 감면, 정책자금 가산점, 병역특례 업체 선정 우대 등 앱에서 확인해 보세요.
-              </p>
-              <button className="w-full bg-indigo-500/30 border border-indigo-400/30 py-3 rounded-xl font-bold text-sm hover:bg-indigo-500/50 transition-all">
-                혜택 상세 보기
-              </button>
-            </div>
-
-          </div>
-        </aside>
-
-      </main>
-
-      {/* 기획 5: 최종 CTA 하단 고정 바 */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-2xl">
-        <div className="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-[2rem] p-3 shadow-2xl flex items-center justify-between">
-          <div className="flex items-center ml-4">
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white mr-3">
-              <Award className="w-5 h-5" />
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Inno-Biz Expert</p>
-              <p className="text-sm font-bold text-white">우리 회사 인증 등급은?</p>
-            </div>
-          </div>
-          <div className="flex space-x-2">
-            <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-2xl font-black text-sm transition-all border border-white/5">
-              1:1 기술상담
-            </button>
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-sm shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all">
-              진단 시작하기
-            </button>
-          </div>
         </div>
-      </div>
+    </header>
 
+    <!-- 3. Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-8 space-y-16">
+            
+            <!-- AI Matching Box -->
+            <section class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm overflow-hidden relative">
+                <div class="flex items-center space-x-2 mb-8">
+                    <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
+                        <i class="fa-solid fa-chart-line text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-gray-900">우리 기업 인증 매칭</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-3xl border border-gray-100 relative">
+                        <div id="lock-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center rounded-3xl">
+                            <i class="fa-solid fa-lock text-blue-600 text-3xl mb-3"></i>
+                            <button onclick="unlockAnalysis()" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg text-sm">로그인하고 예측 등급 보기</button>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">예상 인증 등급</p>
+                        <div class="relative w-32 h-32 flex items-center justify-center">
+                            <svg class="w-full h-full">
+                                <circle cx="64" cy="64" r="58" stroke="#f3f4f6" stroke-width="12" fill="transparent" />
+                                <circle id="progress-circle" cx="64" cy="64" r="58" stroke="#2563eb" stroke-width="12" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="364.4" class="progress-ring__circle" />
+                            </svg>
+                            <span id="grade-text" class="absolute text-3xl font-black text-gray-300 font-serif">?</span>
+                        </div>
+                        <p id="analysis-status" class="mt-4 text-xs font-bold text-gray-400">데이터를 분석 중입니다</p>
+                    </div>
+                    <div class="flex flex-col justify-center space-y-6">
+                        <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                            <div class="flex items-center space-x-2 mb-2 text-blue-700 font-black italic text-sm">
+                                <i class="fa-solid fa-bolt mr-1"></i> AI Insight
+                            </div>
+                            <div id="insight-content" class="text-sm text-blue-900/80 font-medium leading-relaxed">
+                                기업 정보를 입력하시면 귀사의 기술력을 분석하여 <span class="font-bold underline decoration-blue-300 underline-offset-4">이노비즈 통과 가능성</span>을 진단해 드립니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gemini AI Input Section -->
+            <section id="ai-section" class="bg-gradient-to-br from-blue-700 via-indigo-700 to-indigo-900 rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-2 bg-white/20 backdrop-blur-md rounded-lg text-white">
+                            <i class="fa-solid fa-sparkles animate-pulse"></i>
+                        </div>
+                        <span class="font-black uppercase tracking-[0.2em] text-xs text-blue-100">✨ Gemini AI Analysis</span>
+                    </div>
+                    <h2 class="text-3xl font-black mb-4 leading-tight">기업 정보를 입력하고 <br/> <span class="text-blue-300">맞춤형 인증 전략</span>을 받으세요</h2>
+                    
+                    <div class="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-inner mt-8">
+                        <textarea id="business-input" placeholder="예: 자동차 조향 장치 부품을 제조하는 5년 차 기업입니다. 자체 특허 2건이 있으며, 매년 매출이 20% 성장 중입니다..." class="w-full h-36 bg-transparent border-none focus:ring-0 text-white placeholder-blue-200/50 resize-none text-base font-medium"></textarea>
+                        <div class="flex flex-col md:flex-row justify-between items-center mt-6 pt-6 border-t border-white/10 gap-4">
+                            <span class="text-[10px] text-blue-200 font-bold uppercase tracking-wider">Powered by Gemini 2.5 Flash</span>
+                            <button id="ai-btn" onclick="runGeminiAnalysis()" class="w-full md:w-auto bg-white text-indigo-700 px-8 py-3.5 rounded-2xl font-black shadow-lg hover:bg-blue-50 transition-all flex items-center justify-center group">
+                                <span id="btn-text">✨ AI 인증 전략 도출하기</span>
+                                <div id="loading-spinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-indigo-600 border-t-transparent mr-2"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Result Display -->
+                    <div id="ai-result-card" class="hidden mt-8 bg-white text-gray-900 rounded-3xl p-8 animate-bounce-in shadow-2xl">
+                        <div class="flex items-center space-x-2 mb-6 text-blue-600">
+                            <i class="fa-solid fa-award text-2xl"></i>
+                            <h3 class="text-xl font-black">AI 맞춤 분석 결과</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-xs font-black text-gray-400 uppercase mb-3">심사 통과를 위한 전략 팁</p>
+                                <ul id="tips-list" class="space-y-3"></ul>
+                            </div>
+                            <div class="bg-blue-50 p-6 rounded-2xl flex flex-col justify-center border border-blue-100">
+                                <p class="text-xs font-black text-blue-600 mb-2">예상 인증 가능성</p>
+                                <div id="grade-result" class="text-4xl font-black text-blue-900 mb-4">A 등급 <span class="text-lg font-medium text-blue-600">유력</span></div>
+                                <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-black text-sm">✨ 기술서 초안 생성하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="lg:col-span-4">
+            <div class="sticky top-28 space-y-6">
+                <div class="bg-white border-2 border-blue-600 rounded-[2.5rem] p-8 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white px-5 py-1.5 rounded-bl-2xl text-[10px] font-black uppercase tracking-widest">Recommended</div>
+                    <div class="flex items-center space-x-2 text-blue-600 mb-6 font-black text-sm">
+                        <i class="fa-solid fa-shield-halved"></i> 인증 전문 컨설팅
+                    </div>
+                    <h3 class="text-2xl font-black mb-8 leading-snug">이노비즈 <br/><span class="text-blue-600">최종 획득</span> 패키지</h3>
+                    <div class="space-y-4 mb-8 text-sm font-bold">
+                        <div class="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-between">
+                            <span>패키지 A: 자가진단</span>
+                            <span class="text-blue-600">99만원</span>
+                        </div>
+                        <div class="p-4 bg-blue-600 text-white rounded-2xl shadow-lg flex items-center justify-between">
+                            <span>패키지 B: 올인원 대응</span>
+                            <span class="text-blue-100">가장 인기</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black text-lg shadow-lg hover:bg-blue-700 transition-all">무료 상담 예약하기</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Floating Bar -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-2xl">
+        <div class="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-[2rem] p-3 shadow-2xl flex items-center justify-between">
+            <div class="flex items-center ml-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white mr-3">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="hidden sm:block">
+                    <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest">Inno-Biz Expert</p>
+                    <p class="text-sm font-bold text-white">인증 가능성 진단하기</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('ai-section').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black text-sm shadow-lg hover:bg-blue-700 transition-all">진단 시작하기</button>
+        </div>
     </div>
-  );
-};
 
-export default App;
+    <script>
+        const apiKey = ""; // API Key is handled by environment
+
+        function unlockAnalysis() {
+            document.getElementById('lock-overlay').style.display = 'none';
+        }
+
+        async function runGeminiAnalysis() {
+            const input = document.getElementById('business-input').value;
+            if (!input || input.length < 10) {
+                alert("기업 정보를 조금 더 자세히 입력해 주세요.");
+                return;
+            }
+
+            const btnText = document.getElementById('btn-text');
+            const spinner = document.getElementById('loading-spinner');
+            const aiBtn = document.getElementById('ai-btn');
+
+            // UI Loading State
+            btnText.style.display = 'none';
+            spinner.classList.remove('hidden');
+            aiBtn.disabled = true;
+
+            const systemPrompt = "당신은 중소기업 인증 전문 컨설턴트입니다. 사용자가 입력한 기업 정보를 바탕으로 '이노비즈(Inno-Biz)' 인증을 받기 위한 전략적 조언과 기술사업계획서에 포함해야 할 핵심 키워드를 제공하세요. 결과는 'grade', 'keywords', 'tips' 세 부분으로 구성된 JSON 형식으로 한국어로 응답하세요.";
+            const userQuery = `우리 기업 정보: ${input}. 이 정보를 바탕으로 이노비즈 인증 전략을 짜줘.`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        generationConfig: { 
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "OBJECT",
+                                properties: {
+                                    grade: { type: "string" },
+                                    keywords: { type: "array", items: { type: "string" } },
+                                    tips: { type: "array", items: { type: "string" } }
+                                }
+                            }
+                        }
+                    })
+                });
+
+                const result = await response.json();
+                const aiData = JSON.parse(result.candidates[0].content.parts[0].text);
+
+                renderResult(aiData);
+            } catch (error) {
+                console.error("Gemini Error:", error);
+                alert("AI 분석 중 오류가 발생했습니다. 다시 시도해 주세요.");
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.classList.add('hidden');
+                aiBtn.disabled = false;
+            }
+        }
+
+        function renderResult(data) {
+            // Show Result Card
+            const card = document.getElementById('ai-result-card');
+            card.classList.remove('hidden');
+            card.scrollIntoView({behavior: 'smooth'});
+
+            // Set Grade
+            document.getElementById('grade-result').innerHTML = `${data.grade} 등급 <span class="text-lg font-medium text-blue-600">유력</span>`;
+            
+            // Render Tips
+            const tipsList = document.getElementById('tips-list');
+            tipsList.innerHTML = data.tips.map(tip => `
+                <li class="flex items-start">
+                    <i class="fa-solid fa-circle-check text-green-500 mr-2 mt-1"></i>
+                    <span class="text-sm font-medium text-gray-700 leading-snug">${tip}</span>
+                </li>
+            `).join('');
+
+            // Update Circle UI (Top Match Section)
+            unlockAnalysis();
+            const circle = document.getElementById('progress-circle');
+            const gradeText = document.getElementById('grade-text');
+            const statusText = document.getElementById('analysis-status');
+            const insight = document.getElementById('insight-content');
+
+            circle.style.strokeDashoffset = "91.1"; // 75% fill for visual effect
+            gradeText.innerText = data.grade;
+            gradeText.classList.replace('text-gray-300', 'text-blue-600');
+            statusText.innerText = "분석 완료";
+
+            insight.innerHTML = `
+                <p class="text-sm font-bold text-blue-900 mb-2">추천 전략 키워드:</p>
+                <div class="flex flex-wrap gap-2">
+                    ${data.keywords.map(kw => `<span class="text-[10px] bg-white text-blue-600 px-2 py-1 rounded-md border border-blue-200 font-bold">#${kw}</span>`).join('')}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
